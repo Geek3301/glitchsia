@@ -1,1 +1,389 @@
-<h1>ТУТ БУДЕТ КРАСИВАЯ СТРАНИЧКА С ССЫЛКАМИ, КАК ТОЛЬКО ДЕНИС МНЕ СКИНЕТ HTML ФАЙЛ</h1>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090a">
+<meta name="description" content="GLITCHSIA.ME — Minecraft Survival & Anarchy. Заходи на сервер!">
+<title>GLITCHSIA.ME — Minecraft Server</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #9dff78;
+  --green2: #55ff75;
+  --pink: #f49bcf;
+  --ink: #08090a;
+}
+* { box-sizing: border-box; }
+html { min-height: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f7f3f5;
+  background: #111 url("assets/minecraft-background-hq.jpg") center top / 256px auto repeat fixed;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  font-family: "Pixelify Sans", monospace;
+}
+
+body:before, body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+body:before {
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.75));
+}
+body:after {
+  z-index: 0;
+  opacity: .13;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, #c6ffb0 4px, transparent 5px 7px);
+  mix-blend-mode: soft-light;
+  animation: scan 8s linear infinite;
+}
+@keyframes scan {
+  0% { transform: translateY(-8%); }
+  100% { transform: translateY(8%); }
+}
+
+/* Фоновый глитч */
+.bg-glitch {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: url("assets/minecraft-background-hq.jpg") center top / 256px auto repeat;
+  image-rendering: pixelated;
+  mix-blend-mode: screen;
+  filter: hue-rotate(90deg) saturate(2);
+}
+.bg-glitch.flash {
+  animation: bgGlitch .55s steps(2,end);
+}
+@keyframes bgGlitch {
+  0% { opacity: 0; transform: none; clip-path: inset(0); }
+  15% { opacity: .45; transform: translateX(9px); clip-path: inset(17% 0 69%); }
+  32% { opacity: .24; transform: translateX(-7px); clip-path: inset(57% 0 29%); }
+  54% { opacity: .38; transform: translateX(5px); clip-path: inset(78% 0 12%); }
+  100% { opacity: 0; transform: none; clip-path: inset(0); }
+}
+
+/* Анимация падающих лепестков сакуры */
+#petals {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+.petal {
+  position: absolute;
+  top: -35px;
+  width: 13px;
+  height: 20px;
+  border-radius: 80% 15% 75% 20%;
+  background: linear-gradient(135deg, #ffd4e9, #e77eb5 70%, #b84d88);
+  box-shadow: 0 0 10px rgba(244, 155, 207, 0.6);
+  opacity: .88;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0% { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+  50% { transform: translate3d(var(--sway), 55vh, 0) rotate(240deg); }
+  100% { transform: translate3d(calc(var(--sway) * -0.7), 115vh, 0) rotate(540deg); }
+}
+
+main {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 38px 16px;
+}
+
+.card {
+  width: min(100%, 650px);
+  text-align: center;
+  padding: 32px 26px 30px;
+  border: 1px solid rgba(255, 255, 255, .17);
+  border-radius: 15px;
+  background: linear-gradient(155deg, rgba(24, 22, 23, .88), rgba(43, 30, 34, .88));
+  box-shadow: 0 24px 85px #000b, inset 0 1px #ffffff16;
+  backdrop-filter: blur(8px);
+  animation: cardIn .85s cubic-bezier(.2, .8, .2, 1) both;
+  position: relative;
+}
+.card:before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #a0ff7820;
+  border-radius: 10px;
+  pointer-events: none;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(22px) scale(.985); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* Контейнер и дыхание зелёного неона за логотипом */
+.logo-wrapper {
+  position: relative;
+  width: min(66vw, 330px);
+  height: min(66vw, 330px);
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(85, 255, 117, 0.8) 0%, rgba(157, 255, 120, 0.4) 50%, transparent 75%);
+  filter: blur(20px);
+  z-index: 0;
+  animation: logoBreathe 3.5s ease-in-out infinite;
+}
+
+@keyframes logoBreathe {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.55;
+    filter: blur(18px);
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    filter: blur(28px);
+  }
+}
+
+.logo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  clip-path: circle(50%);
+  filter: drop-shadow(0 0 12px #8aff65);
+  animation: logoFlicker 8s steps(1, end) infinite;
+}
+@keyframes logoFlicker {
+  0%, 94%, 100% { opacity: 1; }
+  95% { opacity: .82; }
+  96% { opacity: 1; }
+  97% { opacity: .9; }
+  98% { opacity: 1; }
+}
+
+/* Анимация Глитча для заголовка */
+h1 {
+  position: relative;
+  display: table;
+  margin: 0 auto 16px;
+  font-family: "Press Start 2P", "Pixelify Sans", monospace;
+  font-size: clamp(19px, 4.7vw, 34px);
+  line-height: 1.55;
+  letter-spacing: .025em;
+  color: var(--green);
+  text-align: center;
+  text-shadow: 0 0 5px #b6ff91, 0 0 14px #62ff72, 0 0 32px #31ff58;
+  animation: titleFlicker 4s infinite;
+}
+
+h1:before, h1:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(0);
+}
+
+h1:before {
+  left: -2px;
+  text-shadow: 2px 0 #ff4fb7;
+  color: #ff6ac8;
+  animation: mainGlitch1 2.5s infinite linear alternate-reverse;
+}
+
+h1:after {
+  left: 2px;
+  text-shadow: -2px 0 #00ffff;
+  color: #78ffff;
+  animation: mainGlitch2 3s infinite linear alternate-reverse;
+}
+
+@keyframes mainGlitch1 {
+  0% { clip-path: inset(20% 0 50% 0); transform: translate(-3px, -1px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 1px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(30% 0 30% 0); transform: translate(0, 0); }
+}
+
+@keyframes mainGlitch2 {
+  0% { clip-path: inset(10% 0 60% 0); transform: translate(3px, 1px); }
+  25% { clip-path: inset(50% 0 20% 0); transform: translate(-2px, -1px); }
+  50% { clip-path: inset(30% 0 50% 0); transform: translate(2px, 2px); }
+  75% { clip-path: inset(70% 0 10% 0); transform: translate(-3px, -2px); }
+  100% { clip-path: inset(15% 0 45% 0); transform: translate(0, 0); }
+}
+
+@keyframes titleFlicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: .75; }
+  97% { opacity: 1; }
+  98% { opacity: .88; }
+}
+
+/* Анимация сдвига вправо для надписи ЗАХОДИ) */
+.tagline {
+  display: table;
+  margin: 0 auto 28px;
+  color: var(--pink);
+  font-family: "Pixelify Sans", monospace;
+  font-size: clamp(25px, 5vw, 35px);
+  font-weight: 700;
+  text-shadow: 0 0 7px #ff9ed5, 0 0 20px #fa69bf;
+  animation: slideRight 3s ease-in-out infinite;
+}
+
+@keyframes slideRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(18px);
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin: 0 auto 20px;
+}
+.social {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid #f2b4d66b;
+  background: rgba(220, 155, 190, .18);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .2s, background .2s, box-shadow .2s;
+}
+.social:hover {
+  transform: translateY(-5px) scale(1.07);
+  background: #e58dbb55;
+  box-shadow: 0 0 24px #ef8bc788;
+}
+.social svg {
+  width: 31px;
+  height: 31px;
+  fill: currentColor;
+}
+.ip {
+  margin: 7px 0 0;
+  color: #f2dbe8;
+  font-family: "Pixelify Sans", monospace;
+  font-size: 19px;
+  font-weight: 600;
+  text-shadow: 0 0 9px #f28dc7;
+}
+.ip strong { color: #fff; }
+
+@media(max-width:480px) {
+  main { padding: 22px 12px; }
+  .card { padding: 25px 13px 26px; }
+  .logo-wrapper { width: min(67vw, 280px); height: min(67vw, 280px); margin-bottom: 22px; }
+  .social { width: 58px; height: 58px; }
+  .social svg { width: 28px; height: 28px; }
+  .links { gap: 10px; }
+  .ip { font-size: 17px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *:before, *:after { animation: none!important; transition: none!important; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glitch" id="bgGlitch" aria-hidden="true"></div>
+<div id="petals" aria-hidden="true"></div>
+
+<main>
+  <article class="card">
+    <!-- Обертка логотипа со свечением -->
+    <div class="logo-wrapper">
+      <img class="logo" src="assets/glitchsia-logo-round.jpg" alt="Оригинальный логотип GLITCHSIA">
+    </div>
+
+    <h1 data-text="GLITCHSIA.ME">GLITCHSIA.ME</h1>
+    
+    <p class="tagline">ЗАХОДИ)</p>
+    
+    <nav class="links" aria-label="Социальные сети">
+      <a class="social" href="https://t.me/Glitchsia" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24"><path d="M21.7 4.3 18.5 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.5l-5-1.6c-1.1-.3-1.1-1.1.2-1.6L20.7 2.7c.9-.3 1.7.2 1 1.6z"/></svg></a>
+      <a class="social" href="https://discord.gg/ZKzw4BUKJ" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24"><path d="M19.7 5.3A18 18 0 0 0 15.3 4l-.5 1a16 16 0 0 0-5.6 0l-.5-1a18 18 0 0 0-4.4 1.3C1.5 9.4.7 13.4 1.1 17.4a18 18 0 0 0 5.4 2.7l1.2-2a11 11 0 0 1-1.9-.9l.5-.4a13 13 0 0 0 11.4 0l.5.4-1.9.9 1.2 2a18 18 0 0 0 5.4-2.7c.5-4.7-.8-8.7-3.2-12.1ZM8.8 14.8c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg></a>
+      <a class="social" href="https://www.instagram.com/glitchsia.me?mdxt=MXF3YXJ1cXl3a3ZlMg==" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 2.3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2.2a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Zm5.7-3.4a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z"/></svg></a>
+      <a class="social" href="https://www.tiktok.com/@glitchsia.minecraft?_r=1&_t=ZG-9B31eEHsPyK" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 7.2a7.2 7.2 0 0 1-4.4-1.5v9.1a6.3 6.3 0 1 1-6.3-6.3c.4 0 .8 0 1.2.1v3.5a2.8 2.8 0 1 0 1.6 2.5V2h3.5c.3 2.4 2.2 4.3 4.6 4.5v.7Z"/></svg></a>
+      <a class="social" href="https://youtube.com/@glitchsia_me?si=zh_zeFU5uecM21tg" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg></a>
+    </nav>
+    
+    <p class="ip">(<strong>IP сервера: glitchsia.me</strong>)</p>
+  </article>
+</main>
+
+<script>
+// Генерация сакуры
+(() => {
+  const root = document.getElementById('petals');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('i');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (-Math.random() * 20) + 's';
+    p.style.setProperty('--sway', (Math.random() * 160 - 80) + 'px');
+    p.style.transform = 'scale(' + (0.5 + Math.random() * 0.7) + ')';
+    root.appendChild(p);
+  }
+})();
+
+// Импульсы глитча фона
+(() => {
+  const layer = document.getElementById('bgGlitch');
+  const pulse = () => {
+    layer.classList.remove('flash');
+    void layer.offsetWidth;
+    layer.classList.add('flash');
+    setTimeout(() => layer.classList.remove('flash'), 650);
+    setTimeout(pulse, 4500 + Math.random() * 5000);
+  };
+  setTimeout(pulse, 1500);
+})();
+</script>
+
+</body>
+</html>
